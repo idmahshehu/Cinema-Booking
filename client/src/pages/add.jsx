@@ -7,24 +7,24 @@ const Add = () => {
   const [movie,setMovie] = useState({
     title:"",
     desc:"",
-    price:null,
-    cover:""
+    cover:"",
+    price:null
   });
 
   const navigate = useNavigate();
 
-  // const handleChange = (e) =>{
-  //   setMovie((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  // }
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setMovie(prevState => Object.assign({}, prevState, { [name]: value }));
+  const handleChange = (e) =>{
+    setMovie((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setMovie(prevState => Object.assign({}, prevState, { [name]: value }));
+  // }
 
   const handleClick = async e =>{
     e.preventDefault()
     try{
-      await axios.get("http://localhost:8800/movies/", movie)
+      await axios.post("http://localhost:8800/movies", movie)
       navigate("/movies");
     }catch(err){
       console.log(err);

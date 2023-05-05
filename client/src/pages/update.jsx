@@ -17,13 +17,13 @@ const Update = () => {
 
   const movieId = location.pathname.split("/")[2];
 
-  // const handleChange = (e) =>{
-  //   setMovie((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  // }
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setMovie(prevState => Object.assign({}, prevState, { [name]: value }));
+  const handleChange = (e) =>{
+    setMovie((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setMovie(prevState => Object.assign({}, prevState, { [name]: value }));
+  // }
 
   const handleClick = async e =>{
     e.preventDefault()

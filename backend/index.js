@@ -4,25 +4,32 @@ import cors from "cors";
 import userRoutes from "./routes/users.js";
 import authRoutes from "./routes/auth.js";
 import cookieParser from "cookie-parser";
+import  jwt  from "jsonwebtoken";
 
-const router = express.Router()
+const router = express.Router();
 
 const app = express();
 
 app.use(express.json());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
 // to send any json object
-app.use(cors({
-  origin: "http://localhost:3000",
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
 // login,logout,register
+ 
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
 
-app.use("/api/users", userRoutes)
-app.use("/api/auth", authRoutes)
-
-
-// 
+//
 
 app.get("/", (req, res) => {
   const q = "SELECT * FROM movies";
@@ -36,7 +43,7 @@ app.get("/single/:idmovies", (req, res) => {
   const idmovies = req.params.idmovies;
   const q = "SELECT (`title`,`desc`,`price`) FROM movies WHERE idmovies = ?";
 
-  db.query(q,[idmovies], (err, data) => {
+  db.query(q, [idmovies], (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
   });
@@ -78,7 +85,6 @@ app.delete("/movies/:idmovies", (req, res) => {
   });
 });
 
-
 // Update database
 app.put("/movies/:idmovies", (req, res) => {
   const idmovies = req.params.idmovies;
@@ -98,13 +104,7 @@ app.put("/movies/:idmovies", (req, res) => {
     if (err) return res.json(err);
     return res.json("Movie updated successfully.");
   });
-
-  // db.query(q, [...VALUES,idmovies], (err,data)=>{
-  //     if (err) return res.json(err);
-  //     return res.json("Movie updated successfully.");
-  // })
 });
-
 
 app.listen(8800, () => {
   console.log("Connected to backend!");

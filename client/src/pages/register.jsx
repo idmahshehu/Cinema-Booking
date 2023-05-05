@@ -13,15 +13,9 @@ const Register = () => {
 
 const [err, setErr] = useState(null);
 
-const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInputs((prevInputs) => {
-      return Object.assign({}, prevInputs, {[name]: value,});
-    });
-  };
-    // const handleChange = (e) =>{
-    //     setInputs(prev=>({...prev, [e.target.name]: e.target.value }))
-    // };
+    const handleChange = (e) =>{
+        setInputs(prev=>({...prev, [e.target.name]: e.target.value }))
+    };
 
     // console.log(inputs);
     const navigate = useNavigate();

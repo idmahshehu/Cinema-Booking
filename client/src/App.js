@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import {  createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "./App.css";
 import Movies from "./pages/movies";
 import Add from "./pages/add";
@@ -11,6 +11,7 @@ import Films from "./pages/films";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Single from "./pages/single";
+// BrowserRouter, Routes, Route,
 
 const Layout = () =>{
   return (

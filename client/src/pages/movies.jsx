@@ -37,12 +37,11 @@ const Movies = () => {
           <h2>{movie.title}</h2>
           <p>{movie.desc}</p>
           <span>{movie.price}</span>
-
           <div>
           <button className="delete" onClick={()=>handleDelete(movie.idmovies)}>Delete</button>
           <button  className="update-btn"><Link className="update" to={`/update/${movie.idmovies}`}>Update</Link></button>
           </div>
-          </div>
+        </div>
       ))}
     </div>
     </div>

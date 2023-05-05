@@ -17,26 +17,6 @@ function Home() {
     }
     fetchAllFilms()
   },[])
-
-    // const [username,setUsername] = useState("");
-    // const [user,setUser] = useState({
-    //     username: "",
-    // })
-    // const [loginStatus,setloginStatus] = useState("");
-
-    // const handleClick = () =>{
-    //     axios.post("http://localhost:8800/api/auth/user", {
-    //         username:user,
-    //     }).then((response)=>{
-    //         if(response.data.message){ //kur user nuk ekziston
-    //             setloginStatus(response.data.message);
-    //         }else{ //kur ekziston
-    //             setloginStatus(response.data[0].username);
-    //         }
-            
-    //     });
-        
-    // };//keq
     
   return (
     <div className="home">

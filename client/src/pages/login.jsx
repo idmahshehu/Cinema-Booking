@@ -6,7 +6,7 @@ const Login = () => {
 
     // const [username,setUsername] = useState("");
     // const [password,setPassword] = useState("");
-    const [loginStatus,setloginStatus] = useState("");
+    // const [loginStatus,setloginStatus] = useState("");
 
     // const [inputs,setInputs] = useState({
     //     username:"",
@@ -64,38 +64,39 @@ const handleChange = (e) => {
       return Object.assign({}, prevInputs, {[name]: value,});
     });
   };
+
     // const handleChange = (e) =>{
     //     setInputs(prev=>({...prev, [e.target.name]: e.target.value }))
     // };
 
-    // console.log(inputs);
+    console.log(inputs);
     const navigate = useNavigate();
+    axios.defaults.withCredentials = true;
 
-    const handleClick = () =>{
-            axios.post("http://localhost:8800/api/auth/login",
-                inputs).then((response)=>{
-                if(response.data.message){ //kur user nuk ekziston
-                    setloginStatus(response.data.message);
-                }else{ //kur ekziston
-                    // setloginStatus(response.data[0].username);
-                    navigate("/");
-                }
+    // const handleClick = async (e) =>{
+    //      await axios.post("http://localhost:8800/api/auth/login", inputs)
+    //             .then( res =>{
+    //             if(res.data.Status === "Success"){ //kur user nuk ekziston
+    //                 navigate("/");
+    //             }else{ //kur ekziston
+    //                 // setloginStatus(response.data[0].username);
+    //                 console.log(res.data.Status);
+    //                 alert("Error")
+    //             }
                 
-            });
+    //         });
             
-        };
+    //     };
 
-    // const handleClick = async e =>{
-    //     e.preventDefault()
-        
-    //     try{
-    //         await axios.post("http://localhost:8800/api/auth/login", inputs)
-    //         navigate("/")
-
-    //     }catch(err){
-    //         setErr(err.response.data);
-    //     }
-    // };
+    const handleClick = async (e) =>{
+        e.preventDefault() ;
+        try{
+            await axios.post("http://localhost:8800/api/auth/login", inputs);
+            navigate("/");
+        }catch(err){
+            setErr(err.response.data);
+        }
+    };
 
     
   return (
@@ -106,7 +107,7 @@ const handleChange = (e) => {
             name="username" 
             className="form-control" 
             placeholder="Enter username" 
-            onClick={handleChange}/>
+            onChange={handleChange}/>
         </div> 
 
         <div className="form-group">
@@ -115,16 +116,16 @@ const handleChange = (e) => {
             name="password" 
             className="form-control" 
             placeholder="Enter password" 
-            onClick={handleChange}/>
+            onChange={handleChange}/>
         </div>
 
         <button type="submit" className="btn btn-primary" onClick={handleClick} >Log In</button>
-        {err && <p>{err}</p>}
+        {err && err}
         <div>
             Don't have an account yet?
             <Link to='/register' className='register-btn'> Register now </Link>
             <br />
-            <p>{loginStatus}</p>
+            {/* <p>{loginStatus}</p> */}
         </div>
     </div>
   )
